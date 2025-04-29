@@ -4,7 +4,6 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores.faiss import FAISS
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import StrOutputParser
 import os
 from dotenv import load_dotenv
 
@@ -54,7 +53,8 @@ docs = vectordb.similarity_search(query, k=10) #modify the top k value here
 context = "\n\n".join(doc.page_content for doc in docs)
 #Create prompt
 prompt = ChatPromptTemplate.from_template(
-    '''Use the following context to answer the query:\n\n{context}\n\nQuery: {question}. Please print the query at the top of the response. 
+    '''Use the following context to answer the query:\n\n{context}\n\nQuery: {question}. 
+    Please print the query at the top of the response. 
     Please provide your reasoning for whatever answer you give.
     For each quote, you must provide context from the book for the quote. Thank you!'''
 )
